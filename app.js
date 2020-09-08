@@ -49,7 +49,9 @@ function getTasks() {
     li.appendChild(link);
 
     // append li to ul
-    taskList.appendChild(li);
+    if (li.textContent !== "") {
+      taskList.appendChild(li);
+    }
   });
 }
 
@@ -75,10 +77,12 @@ function addTask(e) {
   li.appendChild(link);
 
   // append li to ul
-  taskList.appendChild(li);
+  if (li.textContent !== "") {
+    taskList.appendChild(li);
+    // Store in LS
 
-  // Store in LS
-  storeTaskInLocalStorage(taskInput.value);
+    storeTaskInLocalStorage(taskInput.value);
+  }
 
   // cleat input
   taskInput.value = "";
@@ -130,9 +134,10 @@ function removeTaskFromLocalStorage(taskItem) {
 // clear tasks
 function clearTasks() {
   //  taskList.innerhtml = '';
-
-  while (taskList.firstChild) {
-    taskList.removeChild(taskList.firstChild);
+  if (confirm("Are You Sure ?")) {
+    while (taskList.firstChild) {
+      taskList.removeChild(taskList.firstChild);
+    }
   }
 
   // Clear from ls
